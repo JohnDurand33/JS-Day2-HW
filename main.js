@@ -102,6 +102,8 @@ const checkStringLength = (string) => {
             resolve = console.log("Big word")
         } else if (string.length < 10) {
             reject = console.log("Small Number")
+        } else {
+            resolve = console.log('the string is 10 characters long')
         }
     });
 }
