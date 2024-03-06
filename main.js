@@ -18,6 +18,36 @@ let person3 = {
     }]
 }
 
+const display_foods = (personObj) => {
+    console.log('Favorite Dishes:\n');
+    // iterate through the object entries
+    Object.entries(personObj).forEach(([key, value]) => {
+        //evaluate if value is an array
+        if (Array.isArray(value)) {
+            // Handle array values, including nested objects
+            value.forEach(item => {
+                if (typeof item == 'object') {
+                    // If the item is an object, log its keys and values
+                    Object.entries(item).forEach(([subKey, subValue]) => {
+                        console.log(`${subKey}: ${subValue}`);
+                    });
+                } else {
+                    // If the item is not an object, log it directly
+                    console.log(item);
+                }
+            });
+        } else {
+            // Directly log non-array values
+            console.log(value);
+        }
+    });
+};
+
+display_foods(person3);
+
+
+
+
 
 //=======Exercise #2=========//
 /*
@@ -30,12 +60,32 @@ age by 3 years. Use an arrow function for both methods
 */
 
 // Create our Person Prototype
+function Person(name, age) {
+    this.name =  name;
+    this.age = age
+};
 
+Person.prototype.printInfo = function() {
+    console.log(`Name: ${this.name}, Age: ${this.age}`);
+};
 
-// Use an arrow to create the printInfo method
+Person.prototype.incrementAge = function() {
+    this.age +=1
+    return this.age;
+};
 
-// Create another arrow function for the addAge method that takes a single parameter
-// Adding to the age 
+let person1 = new Person('John',41);
+let person2 = new Person('Diane',44);
+
+person1.printInfo();
+person2.printInfo();
+
+person1.incrementAge();
+person1.incrementAge();
+person1.incrementAge();
+
+person1.printInfo()
+
 
 
 // =============Exercise #3 ============//
@@ -45,3 +95,14 @@ age by 3 years. Use an arrow function for both methods
     If the length is greater than ten console log "Big word". 
     If the length of the string is less than 10 console log "Small Number"
 */
+
+const checkStringLength = (string) => {
+    return new Promise ( (resolve, reject) => {
+        if (string.length > 10) {
+            resolve = console.log("Big word")
+        } else if (string.length < 10) {
+            reject = console.log("Small Number")
+        }
+    });
+}
+checkStringLength('Diane is the best')
